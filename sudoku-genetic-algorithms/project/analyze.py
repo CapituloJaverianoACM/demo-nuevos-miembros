@@ -1,7 +1,8 @@
 from contextlib import contextmanager
 import time
 
-
+# Explicar porque @contextmanager y explicar lo de las funciones generadoras 
+# Escribir esta función estaría bien
 @contextmanager
 def timer():
     start = time.time()
