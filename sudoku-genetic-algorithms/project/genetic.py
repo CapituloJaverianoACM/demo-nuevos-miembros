@@ -68,31 +68,4 @@ def print_stats(population: Population, generation_id: int, fitness_func: Fitnes
 
     return sorted_population[0]
 
-# Explicar a grandes rasgos porque el sudoku se soluciona con evoluciones
-# Escribir esta función esta bien, y sería bueno explicar en que aporta al sudoku cada parte
-def run_evolution(
-        populate_func: PopulateFunc,
-        fitness_func: FitnessFunc,
-        fitness_limit: int,
-        generation_limit: int = 100) -> Tuple[Population, int]:
-    i = 0
-    population = populate_func()
-    for i in range(generation_limit):
-        population = sort_population(population, fitness_func)
-        if fitness_func(population[0]) <= fitness_limit:
-            break
-
-        next_generation = population[0:2]
-
-        for j in range(int(len(population) / 2) - 1):
-            parents = selection_pair(population, fitness_func)
-            offspring_a, offspring_b = single_point_crossover(parents[0], parents[1])
-            offspring_a = mutation(offspring_a)
-            offspring_b = mutation(offspring_b)
-            next_generation += [offspring_a, offspring_b]
-
-        print_stats(population, i, fitness_func)
-
-        population = next_generation
-
-    return population, i
+# 
