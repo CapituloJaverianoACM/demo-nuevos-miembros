@@ -1,6 +1,12 @@
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
 
+/**
+ * Explicar que el document viene del DOM o para manipular el DOM
+ * 
+ * Explicar el ctx o lo que se peude llegar a hacer con Canvas en realidad
+ */
+
 const $sprites = document.querySelector('#sprites');
 const $bricks = document.querySelector('#bricks');
 
@@ -73,6 +79,9 @@ function drawBricks(){
     for (let c = 0; c < brickColumnCount; c++) {
         for (let r = 0; r < brickRowCount; r++) {
             if (bricks[c][r].status === BRICK_STATUS.ACTIVE) {
+                /**
+                 * Explicar el DrawImage y porque funciona
+                 */
                 ctx.drawImage(
                     $bricks, bricks[c][r].color * 16, 0, 16, 7,
                     bricks[c][r].x, bricks[c][r].y, brickWidth, brickHeight
@@ -82,6 +91,14 @@ function drawBricks(){
     }
 }
 
+
+/**
+ * 
+ * Escribir en el taller esta función estaría bien, explicar el porque de las cosas
+ * Y de las validaciones
+ * 
+ * Resaltar que esta función hace parte de las que se ejecuta en cada frame.
+ */
 function collisionDetection(){
     // Colisiones con las paredes
     if(ballX + ballSpeedX > canvas.width - ballRadius || ballX + ballSpeedX < ballRadius){
@@ -169,6 +186,10 @@ function draw(){
     ballMovement();
     paddleMovement();
 
+    /** 
+     * Explicar para que sirve esta función con respecto al objeto Window y que se puede hacer
+     * Explicar a grandes rasgos que es una función asíncrona que usa el callback Draw
+     */
     window.requestAnimationFrame(draw);
 }
 
