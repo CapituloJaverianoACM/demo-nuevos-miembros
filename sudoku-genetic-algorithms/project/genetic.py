@@ -68,7 +68,8 @@ def print_stats(population: Population, generation_id: int, fitness_func: Fitnes
 
     return sorted_population[0]
 
-
+# Explicar a grandes rasgos porque el sudoku se soluciona con evoluciones
+# Escribir esta función esta bien, y sería bueno explicar en que aporta al sudoku cada parte
 def run_evolution(
         populate_func: PopulateFunc,
         fitness_func: FitnessFunc,
