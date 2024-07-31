@@ -4,6 +4,14 @@
  * Explicar el ctx o lo que se peude llegar a hacer con Canvas en realidad
  */
 
+/*
+Document Object Model, es una interfaz de programación que trata un documento HTML o XML 
+como una estructura jerárquica de objetos. Esta estructura permite a los desarrolladores 
+interactuar con el contenido y el diseño de una página web de manera dinámica, 
+
+
+*/
+
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
 
@@ -99,32 +107,50 @@ function drawBricks(){
  * 
  * Resaltar que esta función hace parte de las que se ejecuta en cada frame.
  */
-/*
-function collisionDetection(){
+////////////////
+
+function collisionDetection() {
     // Colisiones con las paredes
-    if(ballX + ballSpeedX > canvas.width - ballRadius || ballX + ballSpeedX < ballRadius){
+    // Verifica si la bola toca los bordes izquierdo o derecho del canvas
+    if(ballX + ballSpeedX > canvas.width - ballRadius || ballX + ballSpeedX < ballRadius) {
+        // Si es así, invierte la dirección horizontal de la bola
         ballSpeedX = -ballSpeedX;
     }
-    if(ballY + ballSpeedY < ballRadius){
+
+    // Verifica si la bola toca el borde superior del canvas
+    if(ballY + ballSpeedY < ballRadius) {
+        // Si es así, invierte la dirección vertical de la bola
         ballSpeedY = -ballSpeedY;
     }
-    if(ballY + ballSpeedY > canvas.height - ballRadius){
+
+    // Verifica si la bola toca el borde inferior del canvas
+    if(ballY + ballSpeedY > canvas.height - ballRadius) {
+        // Si es así, muestra un mensaje de "Game Over" y recarga la página
         console.log('Game Over');
         document.location.reload();
     }
 
     // Colisiones con la paleta
-    if(ballX > paddleX && ballX < paddleX + paddleWidth && ballY + ballSpeedY === paddleY){
+    // Verifica si la bola está dentro del rango horizontal de la paleta y justo en la altura de la paleta
+    if(ballX > paddleX && ballX < paddleX + paddleWidth && ballY + ballSpeedY === paddleY) {
+        // Si es así, invierte la dirección vertical de la bola
         ballSpeedY = -ballSpeedY;
     }
+
     // Colisiones con los ladrillos
+    // Recorre cada columna de ladrillos
+    // Let es una variable control de bloque y no es redeclarable 
     for (let c = 0; c < brickColumnCount; c++) {
+        // Recorre cada fila de ladrillos en la columna actual
         for (let r = 0; r < brickRowCount; r++) {
-            const brick = bricks[c][r];
+            const brick = bricks[c][r]; // Obtiene el ladrillo en la posición actual
+            // Verifica si el ladrillo está activo
             if (brick.status === BRICK_STATUS.ACTIVE) {
+                // Determina si la bola colisiona con el ladrillo
                 const isBallSameXAsBrick = ballX + ballRadius > brick.x && ballX - ballRadius < brick.x + brickWidth;
                 const isBallSameYAsBrick = ballY + ballRadius > brick.y && ballY - ballRadius < brick.y + brickHeight;
 
+                // Si hay colisión, invierte la dirección vertical de la bola y cambia el estado del ladrillo a "roto"
                 if (isBallSameXAsBrick && isBallSameYAsBrick) {
                     ballSpeedY = -ballSpeedY;
                     brick.status = BRICK_STATUS.BROKEN;
@@ -133,7 +159,8 @@ function collisionDetection(){
         }
     }
 }
-*/
+
+//////////////
 function ballMovement(){
     ballX += ballSpeedX;
     ballY += ballSpeedY;
@@ -190,7 +217,13 @@ function draw(){
      * Explicar para que sirve esta función con respecto al objeto Window y que se puede hacer
      * Explicar a grandes rasgos que es una función asíncrona que usa el callback Draw
      */
-    // window.requestAnimationFrame(draw);
+
+    // es un método que indica al navegador que se desea realizar una animación
+    // y solicita que el navegador programe el repintado de la ventana para el próximo ciclo de animación.
+    // draw es una función que se llama justo antes de que el navegador vuelva a dibujar la pantalla.
+
+    window.requestAnimationFrame(draw);
+    
 }
 
 draw();
